@@ -2,24 +2,32 @@ import java.util.Scanner;
 public class Bioskop27 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double tiket=50000, totalHarga, diskon;
-        int jmlTiket, i=0;
-        System.out.print("Masukkan jumlah tiket: ");
-        jmlTiket = sc.nextInt();
+        int jumlahTiket, totalTiket=0, hargaTiket, totalHarga=0, diskon;
+        char respon='y';
 
-        while (i < jmlTiket) {
-            if (jmlTiket>4) {
-                diskon=0.1;
-                totalHarga = diskon * (jmlTiket*tiket);
-                System.out.println("Yang harus dibayar Rp " + totalHarga);
-            } else if (jmlTiket>10) {
-                diskon = 0.15;
-                totalHarga = diskon * (jmlTiket*tiket);
-                System.out.println("Yang harus dibayar Rp " + totalHarga);
+        while (respon=='y') {
+            System.out.print("Masukkkan jumlah tiket: ");
+            jumlahTiket=sc.nextInt();
+            if (jumlahTiket<=0) {
+                System.out.println("input invalid");
+                continue;
+                
+            } else if (jumlahTiket>10) {
+                diskon=(int) (0.15*50000);
+            } else if (jumlahTiket > 4) {
+                diskon = (int) (0.1 * 50000);
             } else {
-                System.out.println("Silahkan input ulang");
+                diskon = 0;
+                hargaTiket = (50000 - diskon)*jumlahTiket;
+                totalTiket = totalTiket + jumlahTiket;
+                totalHarga = totalHarga + hargaTiket;
+                System.out.println("Diskon: " + diskon);
+                System.out.println("Harga tiket: " + hargaTiket);
+                System.out.print("Transaksi lagi? (y/n): ");
+                respon = sc.next().charAt(0);
             }
         }
-        i++;
+        System.out.println("Tota tiket: " + totalTiket);
+        System.out.println("Total harga: " + totalHarga);
     }
 }
